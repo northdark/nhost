@@ -1,0 +1,109 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background: #FFF;
+	font-family: "Arial";
+}
+body{
+	box-sizing:border-box;
+	border-top:1px solid #D9D9D9;
+}
+
+
+.left-p{
+	width: 25%;
+	height: 100%;
+	float: left;
+	max-height: 100%;
+	overflow: auto;
+	position: relative;
+	border-right: 1.5px solid #D9D9D9;
+}
+.left-p ul li{
+	font-size: 13px;
+	text-align: left;
+	text-indent: 20px;
+	line-height: 40px;
+	height: 40px;
+	box-sizing:border-box;
+	border-top: 1.5px solid transparent;
+  	border-bottom: 1.5px solid transparent;
+	color: #4D4D4D;
+	cursor: pointer;
+	position: relative;
+}
+.left-p ul li:hover{
+	background-color: #EEEEEE;
+}
+.left-p ul li:first-child{
+	font-weight: bold;
+}
+.left-p ul li::selection{
+	background:transparent;
+} 
+.left-p ul li.active{
+	color: #FF7F76;
+	font-weight: bold;
+}
+.left-p ul li.selected{
+	border-top: 1.5px solid #D9D9D9;
+	border-bottom: 1.5px solid #D9D9D9;
+}
+.left-p ul li.selected::after{
+	content: '\020';
+	display: block;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+    top: 12px;
+    right: 5px;
+	background-size: contain;
+	background-image: url('../icon/iconfont-jiantouyou.png');
+}
+
+.tool{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	border-top: 1.5px solid #CCC;
+}
+.tool button{
+	background-color: #FFF;
+	outline: none;
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	background-size: contain;
+	border:none;
+}
+.tool button.btn-add{
+	background-image: url('../icon/iconfont-jiahao.png');
+}
+
+
+.right-p{
+	width: 74%;
+  	height: 100%;
+  	float: right;
+}
+.right-p p{
+	font-size: 14px;
+	line-height: 20px;
+	height: 20px;
+	text-indent: 10px;
+	color: #000;
+	outline: none;
+}
+.right-p p.note{
+	color: #AA5500;
+}
+.right-p p:first-child{
+	margin-top: 8px;
+}

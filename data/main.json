@@ -1,0 +1,28 @@
+{
+	"files":[
+		{
+			"id":"1",
+			"name":"分组一",
+			"active":true,
+			"selected":false
+		},
+		{
+			"id":"2",
+			"name":"分组二",
+			"active":true,
+			"selected":false
+		},
+		{
+			"id":"3",
+			"name":"分组三",
+			"active":false,
+			"selected":true
+		},
+		{
+			"id":"4",
+			"name":"分组四",
+			"active":false,
+			"selected":false
+		}
+	]
+}

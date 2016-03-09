@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>猴斯特</title>
+	<link rel="stylesheet" type="text/css" href="./style/layout.css">
+	<script src="./lib/zepto.js"></script>
+</head>
+<body>
+	<div class="left-p">
+		<ul id="J_list"></ul>
+		<div class="tool">
+			<button title="添加新配置" id="J_tool_add" class="btn-add"></button>
+		</div>
+	</div>
+	<div class="right-p" id="J_hosts"></div>
+	<script type="text/javascript">
+		//1.输出左侧目录
+		var fs = require('fs');
+		var dom_list = document.getElementById('J_list');
+		var hosts_list = document.getElementById('J_hosts');
+
+		var main_str = '',main_json = null;
+		try{	
+			main_str = fs.readFileSync('./data/main.json','utf-8');
+		}
+		catch(err){
+			//文件读取失败：1.文件被误删 2.第一次打开该软件
+			debug;
+		}
+		main_json = JSON.parse(main_str);
+		var selected_id = '';
+		var templates = ['<li class="current" data-id="current">当前Host</li>'],_clsname = '';
+		for(var i = 0;i<(main_json.files || []).length;i++){
+			_clsname = '';
+			if(main_json.files[i].active){
+				_clsname = 'active';
+			}
+			if(main_json.files[i].selected){
+				_clsname += ' selected';
+				selected_id = main_json.files[i].id;
+			}
+			templates.push('<li class="'+_clsname+'" data-id="'+main_json.files[i].id+'"><span>'+main_json.files[i].name+'</span></li>');
+		}
+		dom_list.innerHTML = templates.join('');
+		//2.输出右侧当前host内容
+		fs.readFile('./data/'+selected_id+'.host','utf-8',function(err,data){
+			var hosts = [];
+			var i = 0;
+			var templates = [];
+			if(!err){
+				//遍历获取模板字符串
+				hosts = data.split('\n');
+				for(i;i<hosts.length;i++){
+					if(hosts[i].charAt(0)==='#'){
+						templates.push('<p class="note" contenteditable="true">'+hosts[i]+'</p>');
+					}
+					else{
+						templates.push('<p contenteditable="true">'+hosts[i]+'</p>');
+					}
+				}
+				//字符串插入
+				hosts_list.innerHTML = templates.join('');
+			}
+		});
+		//3.事件：左侧列表区域
+		var listpart = require('./lib/list.js');
+		listpart.bindEvent(window);
+		//4.事件：右侧编辑区域
+		var editpart = require('./lib/edit.js');
+		editpart.bindEvent(window);
+		//5.事件：左下角按钮区域
+		var tool = require('./lib/tool.js');
+		tool.bindEvent(window);
+
+		new window.Notification('提示', {
+            body: '版本更新为：'
+        });
+	</script>
+</body>
+</html>
